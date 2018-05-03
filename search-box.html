@@ -1,0 +1,121 @@
+<template>
+  <style>
+    :host {
+      --size: 40px;
+      --border-size: calc(var(--size) / 10);
+      --color: tomato;
+      --btn-width: calc(var(--size) - (var(--border-size) * 2));
+      --text: white;
+    }
+    
+    *, *:before, *:after {
+      box-sizing: inherit;
+      margin: 0;
+      padding: 0;
+    }
+    
+    form {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      border: var(--border-size) solid var(--color);
+      border-radius: 50px;
+      width: var(--size);
+      height: var(--size);
+      transition: width 0.2s ease 0.3s;
+    }
+
+    form.open {
+      width: 100%;
+      transition-delay: 0.3s
+    }
+
+    form.open:after {
+      width: 0;
+      transition-delay: 0s;
+    }
+
+    form:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: calc(var(--size) / 2 - 3px);
+      height: var(--border-size);
+      background: var(--color);
+      transform: rotate(45deg);
+      transform-origin: top left;
+      top: 87%;
+      left: 87%;
+      transition: width 0.2s ease 0.5s;
+    }
+
+    .btn {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: var(--btn-width);
+      height: 100%;
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .btn:before {
+      bottom: 0;
+      left: 100%;
+      transform-origin: bottom left; 
+      transform: rotate(45deg);
+    }
+
+    .btn:after {
+      top: 0;
+      left: 100%;
+      transform-origin: top left;
+      transform: rotate(-45deg);
+    }
+
+    .btn:before, .btn:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--color);
+      position: absolute;
+      transition: all 0.2s ease;
+    }
+
+    form.open .btn:before, form.open .btn:after {
+      width: calc(var(--size) / 2);
+      transition-delay: 0.5s;
+    }
+
+    form.open .btn:before {
+      bottom: 50%;
+      left: 50%;
+      transform: rotate(45deg) translate(-50%, 50%);
+    }
+
+    form.open .btn:after {
+      top: 50%;
+      left: 50%;
+      transform: rotate(-45deg) translate(-50%, -50%);
+    }
+
+    input {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      color: var(--text); 
+      padding-left: calc(var(--btn-width) / 2);
+      font-size: calc(var(--btn-width) / 2);
+      padding-right: var(--btn-width);
+    }
+
+  </style>
+  <form action="#">
+    <input type="text"/>
+    <div class="btn"></div>
+  </form>
+</template>
+<script type="text/javascript" src="search-box.js"></script>
